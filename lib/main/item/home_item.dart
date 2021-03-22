@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -14,6 +15,7 @@ class HomeItmePage extends StatefulWidget {
   @override
   _HomeItmePageState createState() => _HomeItmePageState();
 }
+
 class _HomeItmePageState extends State<HomeItmePage> {
   List<String> swiperUrlList = [
     "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3404221704,526751635&fm=26&gp=0.jpg",
@@ -34,6 +36,9 @@ class _HomeItmePageState extends State<HomeItmePage> {
     await Future.delayed(Duration(milliseconds: 1000));
     if (mounted) setState(() {});
     _refreshController.loadComplete();
+    // _refreshController.loadNoData();
+    // _refreshController.loadFailed();
+    // _refreshController.requestLoading();
   }
 
   @override
@@ -41,6 +46,8 @@ class _HomeItmePageState extends State<HomeItmePage> {
     return Container(
       color: Colors.grey[200],
       child: SmartRefresher(
+        header: refreshHeader,
+        footer: refreshFooter,
         controller: _refreshController,
         enablePullDown: true,
         enablePullUp: true,
@@ -51,10 +58,11 @@ class _HomeItmePageState extends State<HomeItmePage> {
     );
   }
 
+  // 列表
   ListView buildListView() {
     return ListView.builder(
         padding: EdgeInsets.all(0.0),
-        itemCount: 4,
+        itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
             return Container(
@@ -143,4 +151,21 @@ class _HomeItmePageState extends State<HomeItmePage> {
           );
         });
   }
+
+  // 下拉刷新头
+  Widget refreshHeader0 =
+      defaultTargetPlatform == TargetPlatform.iOS ? MaterialClassicHeader() : MaterialClassicHeader();
+  // 下拉刷新水滴效果
+  Widget refreshHeader = WaterDropHeader(
+    waterDropColor: Colors.red,
+  );
+  // 上拉加载尾
+  LoadIndicator refreshFooter = ClassicFooter(
+    // 下面的设计要和_onLoading方法中的_refreshController.+ 方法对应
+    noDataText: "暂无更所数据",
+    idleText: "上拉加载更多",
+    loadingText: "加载中",
+    failedText: "加载失败",
+    canLoadingText: "取消加载",
+  );
 }
