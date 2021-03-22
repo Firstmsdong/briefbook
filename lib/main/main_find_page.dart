@@ -1,3 +1,4 @@
+import 'package:briefbook/bean/bean_video.dart';
 import 'package:flutter/material.dart';
 
 class MainFindPage extends StatefulWidget {
@@ -11,7 +12,8 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
   List<String> tabTextlist = ["关注", "推荐"];
   List<Tab> tabWidgetList = [];
   TabController tabController;
-  List<String> videoList = [];
+  List<VideoModel> videoList = [];
+  List<VideoModel> videoList2 = [];
   @override
   void initState() {
     super.initState();
@@ -22,8 +24,42 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
     }
     tabController = new TabController(length: tabTextlist.length, vsync: this);
 
+    // 创建模拟数据
     for (var i = 0; i < 10; i++) {
-      videoList.add("测试数据 $i");
+      VideoModel videoModel = new VideoModel();
+      //视频名称
+      videoModel.videoName = "推荐测试数据 $i";
+      //点在的个数
+      videoModel.pariseCount = i * 22;
+      if (i % 3 == 0) {
+        videoModel.isAttention = true;
+        videoModel.isLike = true;
+      } else {
+        videoModel.isAttention = false;
+        videoModel.isLike = false;
+      }
+      videoModel.videoImage = '';
+      videoModel.videoUrl = '';
+      videoList.add(videoModel);
+    }
+    
+   
+    for (var i = 0; i < 10; i++) {
+      VideoModel videoModel = new VideoModel();
+      //视频名称
+      videoModel.videoName = "关注测试数据 $i";
+      //点在的个数
+      videoModel.pariseCount = i * 22;
+      // 是否关注
+      videoModel.isAttention = true;
+      if (i % 3 == 0) {
+        videoModel.isLike = true;
+      } else {
+        videoModel.isLike = false;
+      }
+      videoModel.videoImage = '';
+      videoModel.videoUrl = 'https://www.bilibili.com/video/av243887553';
+      videoList2.add(videoModel);
     }
   }
 
