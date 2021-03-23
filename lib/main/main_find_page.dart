@@ -1,6 +1,8 @@
 import 'package:briefbook/bean/bean_video.dart';
 import 'package:flutter/material.dart';
 
+import 'item/find_video_page.dart';
+
 class MainFindPage extends StatefulWidget {
   MainFindPage({Key key}) : super(key: key);
 
@@ -42,8 +44,7 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
       videoModel.videoUrl = '';
       videoList.add(videoModel);
     }
-    
-   
+
     for (var i = 0; i < 10; i++) {
       VideoModel videoModel = new VideoModel();
       //视频名称
@@ -58,7 +59,7 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
         videoModel.isLike = false;
       }
       videoModel.videoImage = '';
-      videoModel.videoUrl = 'https://www.bilibili.com/video/av243887553';
+      videoModel.videoUrl = 'https://zhonghuio2ocommon.oss-cn-beijing.aliyuncs.com/video/video1.mp4';
       videoList2.add(videoModel);
     }
   }
@@ -114,20 +115,26 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
 
   // 用来创建上下滑动的页面
   Widget buildTableViewItemWidget(String value) {
+    List<VideoModel> list = [];
+    if (value == "推荐") {
+      list = videoList;
+    } else {
+      list = videoList2;
+    }
+
     return PageView.builder(
         // pageview子条目数
-        itemCount: videoList.length,
+        itemCount: list.length,
         // 上下滑动
         scrollDirection: Axis.vertical,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            alignment: Alignment.center,
-            child: Text(
-              "$value 页面中 $index",
-              style: TextStyle(color: Colors.white),
-            ),
-          );
+          VideoModel videoModel = list[index];
+          return buildPageViewItemWidget(value, videoModel);
         });
+  }
+
+    buildPageViewItemWidget(String value, VideoModel videoModel) {
+    return FindVieoItemPage(value, videoModel);
   }
 
   Positioned backGroundView() {
