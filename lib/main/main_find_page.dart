@@ -41,7 +41,7 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
         videoModel.isLike = false;
       }
       videoModel.videoImage = '';
-      videoModel.videoUrl = '';
+      videoModel.videoUrl = 'https://zhonghuio2ocommon.oss-cn-beijing.aliyuncs.com/video/video1.mp4';
       videoList.add(videoModel);
     }
 
@@ -116,7 +116,7 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
   // 用来创建上下滑动的页面
   Widget buildTableViewItemWidget(String value) {
     List<VideoModel> list = [];
-    if (value == "推荐") {
+    if (value == "关注") {
       list = videoList;
     } else {
       list = videoList2;
@@ -133,7 +133,7 @@ class _MainFindPageState extends State with SingleTickerProviderStateMixin {
         });
   }
 
-    buildPageViewItemWidget(String value, VideoModel videoModel) {
+  buildPageViewItemWidget(String value, VideoModel videoModel) {
     return FindVieoItemPage(value, videoModel);
   }
 
