@@ -11,7 +11,7 @@ class MainHomePage extends StatefulWidget {
 class _MainHomePageState extends State<MainHomePage> with SingleTickerProviderStateMixin {
   TabController tabController;
 
-  List<String> topTabList = ["推荐", "动态", "Java", "程序人生", "移动开发", "数据算法", "程序感言"];
+  List<String> topTabList = ["推荐", "动态", "Java", "程序人生", "移动开发", "数据算法", "程序感言",@"美丽新世界"，@"爱情宣言"];
   List<Widget> bodyPageList = [];
   @override
   void initState() {
