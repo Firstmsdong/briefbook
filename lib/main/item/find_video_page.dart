@@ -4,6 +4,8 @@ import 'package:briefbook/bean/bean_video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../bean/bean_video.dart';
+
 class FindVieoItemPage extends StatefulWidget {
   String tabValue;
   VideoModel videoModel;
@@ -14,7 +16,7 @@ class FindVieoItemPage extends StatefulWidget {
 
 class _FindVieoItemPageState extends State<FindVieoItemPage> {
   //创建视频播放控制器
-  VideoPlayerController videoPlayController;
+  late VideoPlayerController videoPlayController;
   // 控制更新视频加载初始化完成状态更新
   Future videoPlayFuture;
   @override
@@ -411,4 +413,17 @@ class _FindVieoItemPageState extends State<FindVieoItemPage> {
       ),
     );
   }
+}
+
+class VideoPlayerController {
+  initialize() {}
+}
+
+class State {
+}
+
+class BoxDecoration {
+}
+
+class Container {
 }
